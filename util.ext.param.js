@@ -1,22 +1,6 @@
-var global = window || this;
-(function webpackUniversalModuleDefinition(name, root, factory) {
-    if (typeof exports === 'object' && typeof module === 'object') {
-        module.exports = factory({}, {}, {});
-    } else if (typeof define === 'function' && define.amd) {
-        define(factory);
-    } else if (typeof define === 'function' && define.cmd) {
-        define(name, factory);
-    } else if (typeof exports === 'object') {
-        exports[name] = factory({}, {}, {});
-    } else {
-        root[name] = factory({}, {}, {});
-    }
-})('util', global, function(require, exports, module) {
+(function(global) {
 
-    var util = global.util || {};
-
-	global.util=util;
-
+    var util = global.util;
 
     util.merger(util, {
         param2Object: function(str) {
@@ -80,4 +64,7 @@ var global = window || this;
 
     return util;
 
-});
+
+
+
+})(this);

@@ -1,20 +1,7 @@
-var global=window||this;
-(function webpackUniversalModuleDefinition(name, root, factory) {
-    if (typeof exports === 'object' && typeof module === 'object') {
-        module.exports = factory();
-    } else if (typeof define === 'function' && define.amd) {
-        define(factory);
-    } else if (typeof define === 'function' && define.cmd) {
-        define(name, factory);
-    } else if (typeof exports === 'object') {
-        exports[name] = factory();
-    } else {
-        root[name] = factory();
-    }
-})('color', global, function(require, exports, module) {
+(function(global) {
 
-    var color = global.Color || {};
-	global.Color=color;
+    var color = global.color || {};
+    global.color = color;
 
     function isString(value) {
         return typeof value === 'string';
@@ -99,5 +86,5 @@ var global=window||this;
 
     return color;
 
-});
 
+})(this);

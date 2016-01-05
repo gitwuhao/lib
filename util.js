@@ -1,17 +1,4 @@
-var global = window || this;
-(function webpackUniversalModuleDefinition(name, root, factory) {
-    if (typeof exports === 'object' && typeof module === 'object') {
-        module.exports = factory({}, {}, {});
-    } else if (typeof define === 'function' && define.amd) {
-        define(factory);
-    } else if (typeof define === 'function' && define.cmd) {
-        define(name, factory);
-    } else if (typeof exports === 'object') {
-        exports[name] = factory({}, {}, {});
-    } else {
-        root[name] = factory({}, {}, {});
-    }
-})('util', global, function(require, exports, module) {
+(function(global) {
 
     var ArrayPrototype = Array.prototype,
         ObjectPrototype = Object.prototype,
@@ -20,8 +7,9 @@ var global = window || this;
         toString = ObjectPrototype.toString,
         ArraySlice = ArrayPrototype.slice,
         emptyFunction = function() {},
-        util = {};
+        util = global.util || {};
 
+    global.util = util;
 
     function each(array, handle, scope) {
         if (!array || !handle) {
@@ -256,48 +244,10 @@ var global = window || this;
                 hash = hash & hash;
             }
             return hash;
-        },
-        eqObject: function(obj1, obj2) {
-            var result = true;
-            util.it(obj1, function(key, value) {
-                if (util.isObject(value)) {
-                    result = util.eqObject(obj1[key], obj2[key]);
-                } else if (value != obj2[key]) {
-                    result = false;
-                }
-                if (result == false) {
-                    return false;
-                }
-            });
-            return result;
-        },
-        eqArray: function(array1, array2) {
-            var defaultArray = [];
-            array1 = array1 || defaultArray;
-            array2 = array2 || defaultArray;
-            if (array1 == array2) {
-                return true;
-            } else if (array1.length != array2.length) {
-                return false;
-            }
-            var result = true;
-            util.each(array1, function(i, item) {
-                if (util.isObject(item)) {
-                    if (!util.eqObject(array1[i], array2[i])) {
-                        result = false;
-                    }
-                } else if (array1[i] != array2[i]) {
-                    result = false;
-                }
-
-                if (result == false) {
-                    return false;
-                }
-            });
-            return result;
         }
     });
 
     return util;
 
-});
+
+})(this);
