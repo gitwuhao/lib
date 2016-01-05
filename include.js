@@ -4,12 +4,12 @@ window.onIncludeReady = function() {
     console.info('onIncludeReady');
 };
 */
-(function(global) {
+(function(exports) {
 
+    var include = exports.include ? exports.include : function(src, callback) {
+        return __include__('js', src, callback);
+    };
 
-
-    var include = global.include || {};
-    global.include = include;
 
     function __include__(type, src, callback) {
         var pack = null;
@@ -52,7 +52,6 @@ window.onIncludeReady = function() {
         return 0;
     };
 
-
     include.head = (function() {
         return document.head || document.body || document.documentElement;
     })();
@@ -92,26 +91,18 @@ window.onIncludeReady = function() {
         args.push.apply(args, arguments);
         this.queue.apply(this, args);
     };
+
     include.js = function(src1, src2, src3, callback) {
         this.queue.apply(this, arguments);
     };
 
-    /*
-        include.css(
-            'assets/css/ui.css',
-            'assets/css/base.css',
-            function() {
-            }
-        );
 
-        include.js(
-            'assets/js/libs/jquery.js',
-            'assets/js/libs/jquery.extend.min.js',
-            'assets/js/ui.js',
-            'assets/js/base.js',
-            global.onIncludeReady
-        );
-    */
+    exports.include = include;
+
+
+    if (exports.onIncludeReady) {
+        exports.onIncludeReady();
+    }
 
     return include;
 

@@ -1,4 +1,4 @@
-(function(global) {
+(function(exports) {
 
     var ArrayPrototype = Array.prototype,
         ObjectPrototype = Object.prototype,
@@ -7,9 +7,7 @@
         toString = ObjectPrototype.toString,
         ArraySlice = ArrayPrototype.slice,
         emptyFunction = function() {},
-        util = global.util || {};
-
-    global.util = util;
+        util = exports.util ? exports.util : {};
 
     function each(array, handle, scope) {
         if (!array || !handle) {
@@ -216,8 +214,8 @@
          *      console.info(this,arguments);
          *  },1000,this,['a',1]);
          */
-        setInterval: getIntervalHandle(global.setInterval),
-        setTimeout: getIntervalHandle(global.setTimeout),
+        setInterval: getIntervalHandle(exports.setInterval),
+        setTimeout: getIntervalHandle(exports.setTimeout),
         isArray: isArray,
         isEmpty: isEmpty,
         isDate: isDate,
@@ -246,6 +244,8 @@
             return hash;
         }
     });
+
+    exports.util = util;
 
     return util;
 

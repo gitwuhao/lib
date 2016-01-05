@@ -1,7 +1,6 @@
-(function(global) {
+(function(exports) {
 
-    var color = global.color || {};
-    global.color = color;
+    var color = exports.color ? exports.color : {};
 
     function isString(value) {
         return typeof value === 'string';
@@ -83,6 +82,8 @@
         return '#' + hex;
     };
 
+
+    exports.color = color;
 
     return color;
 

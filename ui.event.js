@@ -25,6 +25,6 @@
             })
     })();
 
-    return ui;
+    return event;
 
 })(this);
