@@ -1,5 +1,6 @@
 (function(global) {
 
+    var ArrayPrototype = Array.prototype;
 
     Array.prototype.insert = function(index, item) {
         if (this.length < index) {
@@ -8,11 +9,11 @@
             index = 0;
         }
         var args = [index, 0];
-
         for (var i = 1, len = arguments.length; i < len; i++) {
             args.push(arguments[i]);
         }
         this.splice.apply(this, args);
+        return this;
     };
 
     Array.prototype.getLast = function() {

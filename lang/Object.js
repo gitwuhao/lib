@@ -146,5 +146,6 @@
                 delete this[key];
             }
         }
+        return this;
     };
 })(this);
