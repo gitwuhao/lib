@@ -30,7 +30,9 @@
             'misc/color.js',
             function() {
                 (function() {
-                    alert(this.js);
+                    if (console && console.info) {
+                        console.info(this.js);
+                    }
                 }).bind(include)();
             }
 
