@@ -56,20 +56,28 @@ window.onIncludeReady = function() {
         return document.head || document.body || document.documentElement;
     })();
 
+    /**
+     *'js/js.js'
+     */
     include.queue = function(type, src1, src2, src3, callback) {
+        var array = [];
+        array.push.apply(array, arguments);
+        var len = array.length - 1;
+        var index = 1;
+
         if (!/^css$/i.test(type)) {
+            //默认type=js
+            if (!/^js|javascript$/i.test(type)) {
+                index = 0;
+            }
             type = 'js';
         } else {
             type = 'css';
         }
 
-        var list = arguments;
-        var len = list.length - 1;
-        var i = 1;
-
         function get() {
-            if (i == len) {
-                var fn = list[len];
+            if (index == len) {
+                var fn = array[len];
                 if (typeof fn == "function") {
                     fn();
                 } else if (typeof fn == "string") {
@@ -77,7 +85,7 @@ window.onIncludeReady = function() {
                 }
                 return;
             }
-            var url = list[i++];
+            var url = array[index++];
             if (url) {
                 __include__(type, url, get);
             }
@@ -99,10 +107,18 @@ window.onIncludeReady = function() {
 
     exports.include = include;
 
-
-    if (exports.onIncludeReady) {
-        exports.onIncludeReady();
-    }
+    (function() {
+        var readyMethod = 'onIncludeReady';
+        if (exports[readyMethod]) {
+            exports[readyMethod]();
+            // try {
+                // delete exports[readyMethod];
+            //  fix ie bug
+            // } catch (e) {
+                exports[readyMethod] = undefined;
+            // }
+        }
+    })();
 
     return include;
 

@@ -13,7 +13,21 @@
 <body>
     <script type="text/javascript">
     window.onIncludeReady = function() {
+
+        include.css(
+            'css/a.css',
+            'css/b.css',
+            'css/c.css',
+            'css/d.css',
+            'css/e.css',
+            function() {
+                if (window.console && console.info) {
+                    console.info('css');
+                }
+            }
+        );
         include.js(
+            'lang/Object.js',
             'lang/Function.js',
             'lang/String.js',
             'lang/Array.js',
@@ -26,11 +40,11 @@
             'util/param.js',
             'ui/core.js',
             'ui/event.js',
-            'ui/util.scrolloverflow.js',
+            'ui/util/scrolloverflow.js',
             'misc/color.js',
             function() {
                 (function() {
-                    if (console && console.info) {
+                    if (window.console && console.info) {
                         console.info(this.js);
                     }
                 }).bind(include)();
