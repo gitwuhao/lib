@@ -135,12 +135,7 @@
         return value ? value.nodeName === "#text" : false;
     };
 
-    /*
-        FunctionPrototype.__isFunction__ = true;
-        ArrayPrototype.__isArray__ = true;
-        Date.prototype.__isDate__ = true;
-        ObjectPrototype.__isObject__ = true;
-    */
+
 
     function getIntervalHandle(fn) {
         return function(callback, timeout, scope, param) {

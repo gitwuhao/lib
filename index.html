@@ -14,19 +14,26 @@
     <script type="text/javascript">
     window.onIncludeReady = function() {
         include.js(
-            'color.js',
-            'util.js',
-            'util.event.js',
-            'util.ext.equals.js',
-            'util.ext.param.js',
-            'ui.js',
-            'ui.event.js',
-            'ui.util.scrolloverflow.js',
-            'js.ext.String.js',
-            'js.ext.Array.js',
-            'js.ext.Date.js',
-            'js.ext.Math.js',
-            'js.ext.Number.js'
+            'lang/Function.js',
+            'lang/String.js',
+            'lang/Array.js',
+            'lang/Date.js',
+            'lang/Math.js',
+            'lang/Number.js',
+            'util/core.js',
+            'util/event.js',
+            'util/equals.js',
+            'util/param.js',
+            'ui/core.js',
+            'ui/event.js',
+            'ui/util.scrolloverflow.js',
+            'misc/color.js',
+            function() {
+                (function() {
+                    alert(this.js);
+                }).bind(include)();
+            }
+
         );
     };
     </script>
