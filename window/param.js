@@ -1,4 +1,4 @@
-(function(global) {
+( function(global, undefined) {
 
     var util = global.util;
 
